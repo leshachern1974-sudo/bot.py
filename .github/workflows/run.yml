@@ -1,0 +1,24 @@
+name: Run BetGames Bot
+
+on:
+  schedule:
+    - cron: '*/5 * * * *' # Команда запускаться каждые 5 минут
+  workflow_dispatch: # Позволяет запускать вручную кнопкой
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository code
+        uses: actions/checkout@v3
+
+      - name: Set up Python Environment
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install Libraries
+        run: pip install requests
+
+      - name: Execute Script
+        run: python bot.py
